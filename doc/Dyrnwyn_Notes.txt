@@ -1,0 +1,70 @@
+Character  -> Beaver
+	   -> Wolf
+	   -> Eagle/Hawk/Falcon
+	   -> Mountain Lion/Cougar/Panther
+	   ->
+
+Tile  ->  Land
+      ->  Water
+      ->  dam
+
+Obstacles  ->  tree
+	   ->  rock
+	   ->  hole/ditch
+
+Classes:
+
+Character
+-(image) Sprite
+-int ID
+-int position[2]
+-Bool passable[4]
++int* getPosition()
++setPosition(int,int)
++int getID()
++setID(int)
++setSprite(image)
++turn(string)
++forward(string)
++getPassable(tile.type)
+
+
+Beaver extends Character
+-int Inventory
++gather()
++getInventory()
++setInventory()
++addWood(int)
++removeWood(int)
+
+Tile
+-(image)Sprite
+-int position
+-int type
++image getSprite()
++setSprite()
++int* getPosition()
++setPosition()
++int getType()
++setType()
+
+Obstacle
+-(image) sprite
+-int position
+-int ID
+-bool passable
++ getters and setters
+
+Tree extends Obstacle
+-int value
++get/set
+
+Map
+-Tile tileMap[10][10]
+-Character entities[]
+-Obstacle objects[]
++get/set
+
+
+Example code Links:
+http://web.mit.edu/javadev/doc/tutorial/getStarted/applet/index.html
