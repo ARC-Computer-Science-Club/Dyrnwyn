@@ -2,10 +2,17 @@ import javax.swing.ImageIcon;
 
 public class Tile
 {
+    private ImageIcon sprite;
 
-    public Tile(typeOfTile t)
+    private typeOfTile type;
+
+    private Position position;
+
+
+    public Tile(typeOfTile t, int x, int y)
     {
         type = t;
+        position = new Position(x, y);
     }
 
 
@@ -14,45 +21,30 @@ public class Tile
         LAND, WATER, DAM
     }
 
-    private ImageIcon sprite;
-
-    private int[] position = {0,0};
-
-    private typeOfTile type;
 
     public ImageIcon getSprite()
     {
         return sprite;
     }
 
+
     public void setSprite(String path)
     {
         sprite = new ImageIcon(path);
     }
 
-    public int[] getPosition()
+
+    public Position getPosition()
     {
-        return ( position );
+        return position;
     }
 
-    public void setPosition(int[] pos)
-    {
-        if (pos.length == 2)
-        {
-            position = pos;
-        }
-    }
-
-    public void setPosition(int x, int y)
-    {
-        int[] position = {x,y};
-        setPosition(position);
-    }
 
     public void setTypeOfTile(typeOfTile t)
     {
         type = t;
     }
+
 
     public typeOfTile getTypeOfTile()
     {
