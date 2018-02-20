@@ -1,9 +1,9 @@
+import javax.swing.ImageIcon;
 
 public class Character{
   // Attributes
   private ImageIcon sprite;
-  private int id;
-  private int[] position;
+  private Position position;
   private Boolean[] passable;
   private Direction direction;
 
@@ -14,38 +14,26 @@ public class Character{
   // Constructors
   public Character()
   {
-    id = 0;
-    position = new int[]{0,0};
-    passable = new Boolean[]{0,0,0,0};
+    position = new Position();
+    passable = new Boolean[]{false, false, false, false};
   }
-  public Character(int idP,ImageIcon icon,int[] positionP,Boolean[] passableP)
+  public Character(int idP, ImageIcon icon, Position positionP, Boolean[] passableP)
   {
-    id = idP;
     sprite = icon;
     position = positionP;
     passable = passableP;
   }
 
   // Methods
-  public int[] getPosition()
+  public Position getPosition()
   {
     return position;
   }
 
   public void setPosition(int x,int y)
   {
-    position[0] = x;
-    position[1] = y;
-  }
-
-  public int getId()
-  {
-    return id;
-  }
-
-  public void setId(int idP)
-  {
-    id = idP;
+    position.setX(x);
+    position.setY(y);
   }
 
   public void setSprite(ImageIcon icon)
@@ -67,13 +55,13 @@ public class Character{
   {
     switch(direction)
     {
-      case NORTH:  direction = EAST;
+      case NORTH:  direction = Direction.EAST;
         break;
-      case EAST:  direction = SOUTH;
+      case EAST:  direction = Direction.SOUTH;
         break;
-      case SOUTH:  direction = WEST;
+      case SOUTH:  direction = Direction.WEST;
         break;
-      case WEST:  direction = NORTH;
+      case WEST:  direction = Direction.NORTH;
         break;
     }
   }
@@ -81,13 +69,13 @@ public class Character{
   {
     switch(direction)
     {
-      case NORTH:  direction = WEST;
+      case NORTH:  direction = Direction.WEST;
         break;
-      case EAST:  direction = NORTH;
+      case EAST:  direction = Direction.NORTH;
         break;
-      case SOUTH:  direction = EAST;
+      case SOUTH:  direction = Direction.EAST;
         break;
-      case WEST:  direction = SOUTH;
+      case WEST:  direction = Direction.SOUTH;
         break;
     }
   }
