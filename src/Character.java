@@ -1,30 +1,38 @@
 import javax.swing.ImageIcon;
 
-public class Character{
-  // Attributes
+/**
+ * Abstract class Character - Parent class for all characters.
+ *
+ * @author Devin Scholl, Eric Lum and Kevin Kirby 
+ * @version 02/20/18
+ */
+public abstract class Character
+{
+    // Attributes
   private ImageIcon sprite;
   private Position position;
   private Boolean[] passable;
   private Direction direction;
-
+  
   public enum Direction{
     NORTH, EAST, SOUTH, WEST
   }
-
+  
   // Constructors
   public Character()
   {
     position = new Position();
     passable = new Boolean[]{false, false, false, false};
   }
-  public Character(int idP, ImageIcon icon, Position positionP, Boolean[] passableP)
+  
+  public Character(ImageIcon icon, Position position, Boolean[] passable)
   {
     sprite = icon;
-    position = positionP;
-    passable = passableP;
+    this.position = position;
+    this.passable = passable;
   }
-
-  // Methods
+  
+   // Methods
   public Position getPosition()
   {
     return position;
@@ -50,7 +58,7 @@ public class Character{
   {
     direction = face;
   }
-
+  
   public void turnRight()
   {
     switch(direction)
@@ -65,6 +73,7 @@ public class Character{
         break;
     }
   }
+  
   public void turnLeft()
   {
     switch(direction)
@@ -79,11 +88,29 @@ public class Character{
         break;
     }
   }
-
+  
+  /**
+   * Map must check if move is valid before calling this function.
+   */
   public void forward()
   {
-    //Interactions with Map
+    switch(direction)
+    {
+      case NORTH:
+        position.setY(position.getY() - 1);
+        break;
+      case EAST:
+        position.setX(position.getX() + 1);
+        break;
+      case SOUTH:
+        position.setY(position.getY() + 1);
+        break;
+      case WEST:
+        position.setX(position.getX() + 1);
+        break;
+    }
   }
+  
   public Boolean[] getPassable()
   {
     return passable;
