@@ -1,4 +1,4 @@
-
+import javax.swing.ImageIcon;
 /**
  * Tree class. Holds information about the tree obstacles.
  *
@@ -7,7 +7,7 @@
  */
 public class Tree extends Obstacle
 {
-    int value;
+    private int value;
     
     /**
      * defualt constructor for tree class. value set to 1
@@ -16,9 +16,9 @@ public class Tree extends Obstacle
     {
         // initialise instance variables
         value = 1;
-        sprite = "default tree sprite";
-        position = new Position();
-        passable = false;
+        this.setSprite(new ImageIcon("designHub.png"));
+        this.setPosition(new Position());
+        this.setPassable(false);
     }
     
     /**
@@ -29,9 +29,9 @@ public class Tree extends Obstacle
     {
         // initialise instance variables
         this.value = value;
-        this.position = new Position(xPosition, yPosition);
-        this.passable = passable;
-        this.sprite = sprite;
+        this.setPosition(new Position(xPosition, yPosition));
+        this.setPassable(passable);
+        this.setSprite(new ImageIcon("designHub.png"));
     }
     
     /**
@@ -41,9 +41,9 @@ public class Tree extends Obstacle
     {
         // initialise instance variables
         this.value = value;
-        this.position = new Position(xPosition, yPosition);
-        this.passable = passable;
-        this.sprite = "default tree sprite";
+        this.setPosition(new Position(xPosition, yPosition));
+        this.setPassable(passable);
+        this.setSprite(new ImageIcon("designHub.png"));
     }
     
     /**
@@ -54,16 +54,16 @@ public class Tree extends Obstacle
     {
         // initialise instance variables
         this.value = value;
-        this.position = new Position(xPosition, yPosition);
+        this.setPosition(new Position(xPosition, yPosition));
         if(value >= 1)
         {
-            this.passable = false;
+            this.setPassable(false);
         }
         else
         {
-            this.passable = true;
+            this.setPassable(true);
         }
-        this.sprite = "default tree sprite";
+        this.setSprite(new ImageIcon("designHub.png"));
     }
     
     public int getValue()
