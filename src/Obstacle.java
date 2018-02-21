@@ -1,3 +1,5 @@
+import javax.swing.ImageIcon;
+
 /**
  * Abstract class Obstacle - Parent class of all objects that effect
  *  traversal of the map.
@@ -7,11 +9,11 @@
  */
 public abstract class Obstacle
 {
-    String sprite;//path of sprite file
-    Position position;
-    boolean passable;//should this be boolean? or different per character
+    private ImageIcon sprite;//path of sprite file
+    private Position position;
+    private boolean passable;//should this be boolean? or different per character
     
-    public String getSprite()
+    public ImageIcon getSprite()
     {
         return sprite;
     }
@@ -26,7 +28,7 @@ public abstract class Obstacle
         return passable;
     }
     
-    public void setSprite(String sprite)
+    public void setSprite(ImageIcon sprite)
     {
         this.sprite = sprite;
     }
