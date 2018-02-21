@@ -6,8 +6,8 @@
  */
 public class Position
 {
-    int x;
-    int y;
+    private int x;
+    private int y;
     /**
      * defualt constructor. sets both x and y to 0.
      */
