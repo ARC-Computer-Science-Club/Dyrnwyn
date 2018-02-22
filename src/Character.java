@@ -6,30 +6,25 @@ import javax.swing.ImageIcon;
  * @author Devin Scholl, Eric Lum and Kevin Kirby 
  * @version 02/20/18
  */
-public abstract class Character
+public class Character
 {
     // Attributes
   private ImageIcon sprite;
   private Position position;
-  private Boolean[] passable;
+  private Movement movement;
   private Direction direction;
   
   public enum Direction{
     NORTH, EAST, SOUTH, WEST
   }
   
-  // Constructors
-  public Character()
-  {
-    position = new Position();
-    passable = new Boolean[]{false, false, false, false};
-  }
+  // Constructor
   
-  public Character(ImageIcon icon, Position position, Boolean[] passable)
+  public Character(ImageIcon icon, Position position, Movement movement)
   {
     sprite = icon;
     this.position = position;
-    this.passable = passable;
+    this.movement = movement;
   }
   
    // Methods
@@ -53,7 +48,12 @@ public abstract class Character
   {
     return sprite;
   }
-
+  
+  public void setMovement(Movement movement)
+  {
+      this.movement = movement;
+  }
+  
   public void setFacing(Direction face)
   {
     direction = face;
@@ -111,8 +111,8 @@ public abstract class Character
     }
   }
   
-  public Boolean[] getPassable()
+  public Movement getMovement()
   {
-    return passable;
+    return movement;
   }
 }
