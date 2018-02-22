@@ -4,9 +4,9 @@ import javax.swing.ImageIcon;
  * Abstract class Character - Parent class for all characters.
  *
  * @author Devin Scholl, Eric Lum and Kevin Kirby 
- * @version 02/20/18
+ * @version 02/22/18
  */
-public class Character
+public abstract class Character
 {
     // Attributes
   private ImageIcon sprite;
