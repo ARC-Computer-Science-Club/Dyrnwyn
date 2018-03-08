@@ -96,8 +96,10 @@ public class Engine
                 {
                     if(beavers[actor].getWood() >= damCost)
                     {
-                        //check if beaver is in water
-                        beavers[actor].removeWood(damCost);
+                        if(map.getTile(beavers[actor].getPosition()).getTypeOfTile() == Tile.typeOfTile.WATER)
+                        {
+                            beavers[actor].removeWood(damCost);
+                        }
                     }
                     else
                     {
