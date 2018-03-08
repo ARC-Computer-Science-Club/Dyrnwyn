@@ -60,7 +60,13 @@ public class Engine
             case '^': //forward
                 if(actor < numActors)//check if actor is a valid character
                 {
+                    //check if next square is passable
                     beavers[actor].forward();
+                }
+                else
+                {
+                    compiled = false;
+                    errorMsg("Index out of bounds");
                 }
                 break;
             case '>': //turn right
@@ -68,11 +74,21 @@ public class Engine
                 {
                     beavers[actor].turnRight();
                 }
+                else
+                {
+                    compiled = false;
+                    errorMsg("Index out of bounds");
+                }
                 break;
             case '<': //turn left
                 if(actor < numActors)//check if actor is a valid character
                 {
                     beavers[actor].turnLeft();
+                }
+                else
+                {
+                    compiled = false;
+                    errorMsg("Index out of bounds");
                 }
                 break;
             case '#': //build dam
@@ -83,6 +99,16 @@ public class Engine
                         //check if beaver is in water
                         beavers[actor].removeWood(damCost);
                     }
+                    else
+                    {
+                        compiled = false;
+                        errorMsg("Not enough dam wood");
+                    }
+                }
+                else
+                {
+                    compiled = false;
+                    errorMsg("Index out of bounds");
                 }
                 break;
             case '+': //gather wood
@@ -93,6 +119,11 @@ public class Engine
                     //get value of tree at position facing+1.
                     //increase beavers wood by value of tree.
                 }
+                else
+                {
+                    compiled = false;
+                    errorMsg("Index out of bounds");
+                }
                 break;
             case '\n': //newline
             case '\t': //tab
@@ -101,5 +132,10 @@ public class Engine
             default:
         }
         return compiled;
+    }
+    
+    public void errorMsg(String error)
+    {
+        System.out.println(error);
     }
 }
