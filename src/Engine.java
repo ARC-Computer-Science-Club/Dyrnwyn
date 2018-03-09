@@ -96,9 +96,16 @@ public class Engine
                 {
                     if(beavers[actor].getWood() >= damCost)
                     {
-                        if(map.getTile(beavers[actor].getPosition()).getTypeOfTile() == Tile.typeOfTile.WATER)
+                        Position currentPosition = beavers[actor].getPosition();
+                        Tile currentTile = map.getTile(currentPosition);
+                        if(currentTile.getTypeOfTile() == Tile.typeOfTile.WATER)
                         {
                             beavers[actor].removeWood(damCost);
+                        }
+                        else
+                        {
+                            compiled = false;
+                            errorMsg("You may only build dams in water.");
                         }
                     }
                     else
