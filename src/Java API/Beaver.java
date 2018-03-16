@@ -18,7 +18,7 @@ class Beaver{
   // Constructor. Also converts the beaver's ID into ASCII.
   Beaver(int beaverNumber, FileWriter writer){
     this.beaverNumber = beaverNumber;
-    this.idToASCII= new char[(beaverNumber/255) + 1];
+    this.idToASCII= new char[(beaverNumber/256) + 1];
     this.writer = writer;
     System.out.print(idToASCII.length);
     for (int i = 0; i < idToASCII.length; i++){
