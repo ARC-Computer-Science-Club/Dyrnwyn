@@ -20,7 +20,6 @@ class Beaver{
     this.beaverNumber = beaverNumber;
     this.idToASCII= new char[(beaverNumber/256) + 1];
     this.writer = writer;
-    System.out.print(idToASCII.length);
     for (int i = 0; i < idToASCII.length; i++){
       if (beaverNumber - 255 > 0){
         idToASCII[i] = 255;
