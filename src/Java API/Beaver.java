@@ -7,19 +7,19 @@ enum Direction{
   N, E, S, W
 } 
 
-// Imports the FileWriter object so we can write to the file from here instead of main.
 class Beaver{
   private Direction direction;
   private int wood = 0;
   private int beaverNumber;
-  private FileWriter writer;
+  private File file = new File(".\\moveCommand.txt");  // Identify a new text file at the local directory where this code is located at
+  private FileWriter writer = new FileWriter(file); // Readys an object linked to "moveCommand.txt" so it can be written.
   private char[] idToASCII;
   
   // Constructor. Also converts the beaver's ID into ASCII.
-  Beaver(int beaverNumber, FileWriter writer){
+  Beaver(int beaverNumber) throws IOException{
     this.beaverNumber = beaverNumber;
     this.idToASCII= new char[(beaverNumber/256) + 1];
-    this.writer = writer;
+    
     for (int i = 0; i < idToASCII.length; i++){
       if (beaverNumber - 255 > 0){
         idToASCII[i] = 255;
@@ -29,6 +29,16 @@ class Beaver{
         idToASCII[i] = (char)beaverNumber;
       }
     }
+    
+    // Checks to see if the "moveCommand.txt" is already inside the directory
+    if (!(file.createNewFile())){
+      System.out.println("File already exists.\n" + 
+                         "Overwritting the file.");
+    }
+    else{
+      System.out.println("Writing a new file called \"moveCommand.txt\"");
+    }
+    
   }
   
   // Writes each character into the file for all of the commands
@@ -70,6 +80,13 @@ class Beaver{
       writer.write(idToASCII[i]);
     }
     writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+  }
+  
+  // Returns this specific beaver's "writer" so the main java file can close the file.
+  // Although we can put this in the Character superclass of the Beaver Class so all
+  // characters can return this statement.
+  public FileWriter returnBeaverWriter(){
+    return (this.writer);
   }
   
   // Misc. stuff, delete them if you want. 
