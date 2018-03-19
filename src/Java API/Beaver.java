@@ -11,9 +11,9 @@ class Beaver{
   private Direction direction;
   private int wood = 0;
   private int beaverNumber;
+  private char[] idToASCII;
   private File file = new File(".\\moveCommand.txt");  // Identify a new text file at the local directory where this code is located at
   private FileWriter writer = new FileWriter(file); // Readys an object linked to "moveCommand.txt" so it can be written.
-  private char[] idToASCII;
   
   // Constructor. Also converts the beaver's ID into ASCII.
   Beaver(int beaverNumber) throws IOException{
@@ -39,6 +39,7 @@ class Beaver{
       System.out.println("Writing a new file called \"moveCommand.txt\"");
     }
     
+    writer = new FileWriter(file, true);
   }
   
   // Writes each character into the file for all of the commands
@@ -85,8 +86,8 @@ class Beaver{
   // Returns this specific beaver's "writer" so the main java file can close the file.
   // Although we can put this in the Character superclass of the Beaver Class so all
   // characters can return this statement.
-  public FileWriter returnBeaverWriter(){
-    return (this.writer);
+  public FileWriter returnBeaverWriter() throws IOException{
+    return this.writer;
   }
   
   // Misc. stuff, delete them if you want. 
@@ -95,10 +96,10 @@ class Beaver{
   }
   
   public int woodAmount(){
-    return wood;
+    return this.wood;
   }
   
   public int ID(){
-    return beaverNumber;
+    return this.beaverNumber;
   }
 }
