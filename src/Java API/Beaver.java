@@ -1,25 +1,21 @@
-// Import stuff
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 enum Direction{
   N, E, S, W
 } 
 
+// In this case, we don't use the FileWriter class in here.
 class Beaver{
   private Direction direction;
   private int wood = 0;
   private int beaverNumber;
-  private char[] idToASCII;
-  private File file = new File(".\\moveCommand.txt");  // Identify a new text file at the local directory where this code is located at
-  private FileWriter writer = new FileWriter(file); // Readys an object linked to "moveCommand.txt" so it can be written.
+  private String idOfBeaver = "";
+  private Commander beaverCommander;
+  private StringBuilder command = new StringBuilder();
   
   // Constructor. Also converts the beaver's ID into ASCII.
-  Beaver(int beaverNumber) throws IOException{
+  Beaver(int beaverNumber, Commander beaverCommander){
     this.beaverNumber = beaverNumber;
-    this.idToASCII= new char[(beaverNumber/256) + 1];
-    
+    this.beaverCommander = beaverCommander;
+    char[] idToASCII= new char[(beaverNumber/256) + 1];
     for (int i = 0; i < idToASCII.length; i++){
       if (beaverNumber - 255 > 0){
         idToASCII[i] = 255;
@@ -29,77 +25,73 @@ class Beaver{
         idToASCII[i] = (char)beaverNumber;
       }
     }
+    idOfBeaver = String.valueOf(idToASCII);
+  }
+  
+  // Each beaver tells the beaverCommander it's under and then the beaverCommander will write it down
+  public void forward(){
     
-    // Checks to see if the "moveCommand.txt" is already inside the directory
-    if (!(file.createNewFile())){
-      System.out.println("File already exists.\n" + 
-                         "Overwritting the file.");
-    }
-    else{
-      System.out.println("Writing a new file called \"moveCommand.txt\"");
-    }
+    // The beaver readys its command to the commander
+    command.append("^"); // Forward Command
+    command.append(idOfBeaver); // The beaver ID in ASCII
+    command.append((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
     
-    writer = new FileWriter(file, true);
+    // Then the beaverCommander writes the beaver's command down
+    beaverCommander.getCommandList().append(command); // The beaverCommander copys the command to the commandOrder 
+    command.delete(0, command.length()); // The beaver will stand by for more orders
   }
   
-  // Writes each character into the file for all of the commands
-  public void forward() throws IOException{
-    writer.write("^"); // Forward command
-    for (int i = 0; i < (idToASCII.length); i++){ // The beaver ID in ASCII
-      writer.write(idToASCII[i]);
-    }
-    writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+  public void turnLeft(){
+    
+    command.append("<"); // Turn left Command
+    command.append(idOfBeaver); // The beaver ID in ASCII
+    command.append((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+    
+    beaverCommander.getCommandList().append(command);  
+    command.delete(0, command.length()); 
   }
   
-  public void turnLeft() throws IOException{
-    writer.write("<"); // Turn Left command
-    for (int i = 0; i < (idToASCII.length); i++){ // The beaver ID in ASCII
-      writer.write(idToASCII[i]);
-    }
-    writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+  public void turnRight(){
+    
+    command.append(">"); // Turn right Command
+    command.append(idOfBeaver); // The beaver ID in ASCII
+    command.append((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+    
+    beaverCommander.getCommandList().append(command);  
+    command.delete(0, command.length()); 
   }
   
-  public void turnRight() throws IOException{
-    writer.write(">"); // Turn Right command
-    for (int i = 0; i < (idToASCII.length); i++){ // The beaver ID in ASCII
-      writer.write(idToASCII[i]);
-    }
-    writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+  public void buildDam(){
+    
+    command.append("#"); // Build Command
+    command.append(idOfBeaver); // The beaver ID in ASCII
+    command.append((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+    
+    beaverCommander.getCommandList().append(command); 
+    command.delete(0, command.length());
   }
   
-  public void buildDam() throws IOException{
-    writer.write("#"); // Build Dam Command
-    for (int i = 0; i < (idToASCII.length); i++){ // The beaver ID in ASCII
-      writer.write(idToASCII[i]);
-    }
-    writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+  public void gather(){
+    
+    command.append("+"); // Gather Command
+    command.append(idOfBeaver); // The beaver ID in ASCII
+    command.append((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
+    
+    beaverCommander.getCommandList().append(command); 
+    command.delete(0, command.length());
   }
   
-  public void gather() throws IOException{
-    writer.write("+"); // Gather command
-    for (int i = 0; i < (idToASCII.length); i++){ // The beaver ID in ASCII
-      writer.write(idToASCII[i]);
-    }
-    writer.write((char)0 + "\n"); // NULL terminating + newline. Will delete the newline character later.
-  }
   
-  // Returns this specific beaver's "writer" so the main java file can close the file.
-  // Although we can put this in the Character superclass of the Beaver Class so all
-  // characters can return this statement.
-  public FileWriter returnBeaverWriter() throws IOException{
-    return this.writer;
-  }
-  
-  // Misc. stuff, delete them if you want. 
-  public Direction currentDirection(){
+  // Misc. stuff, delete them if you want.
+  public Direction direction(){
     return this.direction;
   }
   
   public int woodAmount(){
-    return this.wood;
+    return wood;
   }
   
   public int ID(){
-    return this.beaverNumber;
+    return beaverNumber;
   }
 }
