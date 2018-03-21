@@ -8,7 +8,7 @@ import java.io.IOException;
 class Commander{
   private File file = new File(".\\moveCommand.txt");  // Identify a new text file at the local directory where this code is located at
   private FileWriter writer = new FileWriter(file); // Readys the FileWriter linked to "moveCommand.txt" so it can be written.
-  protected StringBuilder commandList = new StringBuilder(); // Adds each beaver's command to this StringBuilder 
+  private StringBuilder commandList = new StringBuilder(); // Adds each beaver's command to this StringBuilder 
   
   Commander()throws IOException{
     FileWriter writer = new FileWriter(file, true); // Needed here so we can erase all the content in "moveCommand.txt"
