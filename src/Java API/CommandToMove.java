@@ -2,10 +2,9 @@
 import java.io.IOException;
 
 /* 
-The main class that Beaver.java, that's in the same folder as this file,
-connects to. This test file will create a beaver Commander and some beavers so
-the Commander can interact with each beaver and then writes the order of each
-beaver to "moveCommand.txt"
+The main class that Beaver.java, that's in the same folder as this file, connects to. This test file will create a
+beaver Commander and some beavers so the Commander can interact with each
+beaver and then writes the order of each beaver to "moveCommand.txt"
                     
                     *IN SEQUENTIAL ORDER*
                     
@@ -23,12 +22,12 @@ class CommandToMove2{
     Commander beaverCommander = new Commander();
     
     // Each beaver unit
-    Beaver2 beaver0 = new Beaver2(ID + 0, beaverCommander);
-    Beaver2 beaver1 = new Beaver2(ID + 1, beaverCommander);
-    Beaver2 beaver2 = new Beaver2(ID + 2, beaverCommander);
-    Beaver2 beaver3 = new Beaver2(ID + 3, beaverCommander);
-    Beaver2 beaver4 = new Beaver2(ID + 4, beaverCommander);
-    Beaver2 beaver5 = new Beaver2(ID + 5, beaverCommander);
+    Beaver beaver0 = new Beaver(ID + 0, beaverCommander);
+    Beaver beaver1 = new Beaver(ID + 1, beaverCommander);
+    Beaver beaver2 = new Beaver(ID + 2, beaverCommander);
+    Beaver beaver3 = new Beaver(ID + 3, beaverCommander);
+    Beaver beaver4 = new Beaver(ID + 4, beaverCommander);
+    Beaver beaver5 = new Beaver(ID + 5, beaverCommander);
     
     // Each beaver's orders
     beaver0.forward();
