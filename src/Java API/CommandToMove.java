@@ -1,52 +1,72 @@
-// Import stuff
-import static java.lang.System.*;
+// Needs the IOException...
 import java.io.IOException;
 
-// The main class that Beaver.java connects to. This initializes the file we're going to
-// write and allows methods/functions inside the Beaver class to write to "moveCommand.txt".
-class TestingWriteCommands{
+/* 
+The main class that Beaver.java, that's in the same folder as this file,
+connects to. This test file will create a beaver Commander and some beavers so
+the Commander can interact with each beaver and then writes the order of each
+beaver to "moveCommand.txt"
+                    
+                    *IN SEQUENTIAL ORDER*
+                    
+It's pretty important that the commands SHOULD be printed out how they are
+shown. The other versions before had each command group up with each specific 
+beaver so you wouldn't know what beaver did their commands first.
+*/
+class CommandToMove2{
   public static void main(String args[]) throws IOException{
-    Beaver beaver0 = new Beaver(0);
-    Beaver beaver1 = new Beaver(1);
-    Beaver beaver2 = new Beaver(2);
-    Beaver beaver3 = new Beaver(3);
-    Beaver beaver4 = new Beaver(4);
     
-    // The object's functions
+    // Use this for the beaver's ID.
+    final int ID = 48;
+    
+    // Each beaver needs a commander to communicate to each other.
+    Commander beaverCommander = new Commander();
+    
+    // Each beaver unit
+    Beaver2 beaver0 = new Beaver2(ID + 0, beaverCommander);
+    Beaver2 beaver1 = new Beaver2(ID + 1, beaverCommander);
+    Beaver2 beaver2 = new Beaver2(ID + 2, beaverCommander);
+    Beaver2 beaver3 = new Beaver2(ID + 3, beaverCommander);
+    Beaver2 beaver4 = new Beaver2(ID + 4, beaverCommander);
+    Beaver2 beaver5 = new Beaver2(ID + 5, beaverCommander);
+    
+    // Each beaver's orders
     beaver0.forward();
     beaver1.forward();
     beaver2.forward();
     beaver3.forward();
     beaver4.forward();
+    beaver5.forward();
     
     beaver0.turnLeft();
     beaver1.turnLeft();
     beaver2.turnLeft();
     beaver3.turnLeft();
     beaver4.turnLeft();
+    beaver5.turnLeft();    
     
     beaver0.turnRight();
     beaver1.turnRight();
     beaver2.turnRight();
     beaver3.turnRight();
     beaver4.turnRight();
+    beaver5.turnRight();
     
     beaver0.buildDam();
     beaver1.buildDam();
     beaver2.buildDam();
     beaver3.buildDam();
     beaver4.buildDam();
+    beaver5.buildDam();
     
     beaver0.gather();
     beaver1.gather();
     beaver2.gather();
     beaver3.gather();
     beaver4.gather();
+    beaver5.gather();
     
-    beaver0.returnBeaverWriter().close();
-    beaver1.returnBeaverWriter().close();
-    beaver2.returnBeaverWriter().close();
-    beaver3.returnBeaverWriter().close();
-    beaver4.returnBeaverWriter().close();
+    beaverCommander.printCommandList(); // The commander will print to the console the command orders. 
+    beaverCommander.commenceOrder(); // Then the commander will write it out to "moveCommand.txt"
   }
 }
